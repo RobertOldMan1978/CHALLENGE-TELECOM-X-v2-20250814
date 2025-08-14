@@ -1,0 +1,2 @@
+# CHALLENGE-TELECOM-X-v2-20250814
+creacion de modelo predictivo para CHALLENGE TELECOM I PASANDO A VERSION 2
