@@ -1,4 +1,3 @@
-# CHALLENGE-TELECOM-X-v2-20250814
 # 📊 Proyecto de Predicción de Churn de Clientes
 
 ## 📌 Objetivo
@@ -71,8 +70,9 @@ Desarrollar un sistema de **clasificación de churn (cancelación de clientes)**
   - `min_samples_leaf`: [1, 2, 5]
 - **Mejor configuración**:
 ```python
+from sklearn.ensemble import RandomForestClassifier
 
-RandomForestClassifier(
+rf_final = RandomForestClassifier(
     n_estimators=200,
     max_depth=8,
     min_samples_leaf=5,
@@ -80,6 +80,14 @@ RandomForestClassifier(
     random_state=42,
     n_jobs=-1
 )
+```
+- **Umbral óptimo**: `0.326`  
+- **Métricas finales**:  
+  - Precisión: `0.4547`  
+  - Recall: `0.9118`  
+  - F2: `0.7591`
+
+---
 
 ## 7️⃣ Comparativa final de modelos (umbral óptimo)
 
@@ -90,6 +98,8 @@ RandomForestClassifier(
 | LogReg (balanced)     | 0.334  | 0.4358    | 0.9171  | 0.7512 |
 | Decision Tree (d=5)   | 0.331  | 0.4111    | 0.9465  | 0.7510 |
 | KNN                   | 0.134  | 0.4038    | 0.9037  | 0.7244 |
+
+![Comparativa de modelos](comparativa_modelos.png)
 
 ---
 
@@ -109,23 +119,27 @@ RandomForestClassifier(
 6. `internet.soporte_tecnico_True` → reduce churn.
 7. `internet.seguridad_en_linea_Yes` → reduce churn.
 
+![Top variables más relevantes](importancia_variables.png)
+
 ---
 
-## 9️⃣ Recomendaciones de negocio
+## 9️⃣ Matriz de confusión antes y después del ajuste (RF optimizado)
+
+**Antes del ajuste (umbral = 0.50):**
+![Matriz de confusión antes](matriz_confusion_antes.png)
+
+**Después del ajuste (umbral = 0.326):**
+![Matriz de confusión después](matriz_confusion_despues.png)
+
+---
+
+## 🔟 Recomendaciones de negocio
 
 1. **Promover contratos de 2 años** para aumentar retención.
 2. **Revisar calidad del servicio de fibra óptica** y reducir incidencias.
 3. **Fomentar métodos de pago automáticos** para reducir riesgo asociado a “Electronic check”.
 4. **Incentivar contratación de soporte técnico y seguridad en línea**.
 5. **Aplicar el modelo mensualmente** para identificar clientes en riesgo y priorizar intervenciones.
-
----
-
-## 🔟 Próximos pasos
-
-- Implementar el modelo en un entorno de prueba (API o dashboard interno).
-- Monitorear métricas de recall y precisión de forma continua.
-- Ajustar umbral o reentrenar si cambian patrones de datos.
 
 ---
 
@@ -140,4 +154,3 @@ RandomForestClassifier(
   - One-Hot Encoding
   - StandardScaler
   - Permutation Importance
-
